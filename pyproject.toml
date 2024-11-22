@@ -1,0 +1,20 @@
+[project]
+name = "ticket_classification_and_response_automation"
+version = "0.1.0"
+description = "ticket_classification_and_response_automation using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.80.0,<1.0.0"
+]
+
+[project.scripts]
+ticket_classification_and_response_automation = "ticket_classification_and_response_automation.main:run"
+run_crew = "ticket_classification_and_response_automation.main:run"
+train = "ticket_classification_and_response_automation.main:train"
+replay = "ticket_classification_and_response_automation.main:replay"
+test = "ticket_classification_and_response_automation.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

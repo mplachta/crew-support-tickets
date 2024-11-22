@@ -1,0 +1,44 @@
+classify_ticket_category:
+  description: 'Analyze {subject} and {content} to classify the ticket into one of
+    the predefined categories: Access and Account Management, Technical Support, Information
+    and Documentation, Training and Onboarding, Billing and Subscription, Feature
+    Requests and Feedback.'
+  expected_output: A classification label indicating the category of the ticket, based
+    on its {subject} and {content}. Make sure to include only the label.
+  agent: ticket_classifier
+
+assign_ticket_priority:
+  description: Evaluate customer urgency and sentiment from {content} to assign a
+    priority level (Low, Medium, High).
+  expected_output: A priority level for the ticket, determined by analyzing the urgency
+    and sentiment of its {content}. Make sure to include only the label.
+  agent: priority_assigner
+
+generate_draft_response:
+  description: Use the available tools to search crewai.com, docs.crewai.com, and
+    help.crewai.com for relevant information to create a draft response to the ticket 
+    {subject} and {content} in the context of the CrewAI Enterprise Platform. Use the CSV
+    RAG Search Tool to search a CSV file for relevant information to create a draft
+    response. Use the JSON RAG Search Tool to search a JSON file for relevant information
+    to create a draft response.
+  expected_output: >
+    A draft response for the ticket.
+  agent: response_generator
+
+prepare_response:
+  description: Prepare a response for a customer support ticket.
+  expected_output: >
+    # Ticket ID: *{ticket_id}*
+    Subject: *{subject}*
+
+    Classification: *[classification category]*
+    Priority: *[priority level]*
+
+    ## Suggested response:
+
+    [draft response]
+  agent: support_manager
+  context:
+    - classify_ticket_category
+    - assign_ticket_priority
+    - generate_draft_response
