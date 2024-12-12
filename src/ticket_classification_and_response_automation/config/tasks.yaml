@@ -1,17 +1,34 @@
 classify_ticket_category:
-  description: 'Analyze {subject} and {content} to classify the ticket into one of
-    the predefined categories: Access and Account Management, Technical Support, Information
-    and Documentation, Training and Onboarding, Billing and Subscription, Feature
-    Requests and Feedback.'
+  description: >
+    Analyze {subject} and {content} to classify the ticket into one of
+    the predefined categories: 
+    Access and Account Management
+    Technical Support
+    Information and Documentation
+    Training and Onboarding
+    Billing and Subscription
+    Feature Requests and Feedback.
   expected_output: A classification label indicating the category of the ticket, based
-    on its {subject} and {content}. Make sure to include only the label.
+    on its {subject} and {content}. Make sure to include only the label from the list and no other text.
   agent: ticket_classifier
 
 assign_ticket_priority:
-  description: Evaluate customer urgency and sentiment from {content} to assign a
-    priority level (Low, Medium, High).
-  expected_output: A priority level for the ticket, determined by analyzing the urgency
-    and sentiment of its {content}. Make sure to include only the label.
+  description: >
+    Evaluate customer urgency and sentiment from {subject} and {content} 
+    and ticket category classification to assign a priority level. 
+    Information and Documentation tickets should be assigned a Low priority.
+    Feature Requests and Feedback tickets should be assigned a Low priority unless there is a need for urgency expressed by the customer.
+    Billing and Subscription tickets should always be assigned a High priority.
+
+    Use one of the following priority levels:
+    High
+    Medium
+    Low
+  expected_output: >
+    A priority level for the ticket, determined by analyzing the urgency
+    and sentiment of its {subject} and {content}. Make sure to include only the label from the list and no other text.
+  context:
+    - classify_ticket_category
   agent: priority_assigner
 
 generate_draft_response:
@@ -28,7 +45,10 @@ generate_draft_response:
 prepare_response:
   description: Prepare a response for a customer support ticket.
   expected_output: >
+    The following markdown:
+    
     # Ticket ID: *{ticket_id}*
+    URL: https://app.hubspot.com/contacts/45732688/ticket/{ticket_id}
     Subject: *{subject}*
 
     Classification: *[classification category]*

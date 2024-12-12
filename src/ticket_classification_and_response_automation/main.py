@@ -11,27 +11,13 @@ def run():
     """
     Run the crew.
     """
-    inputs = {
-        'subject': 'RE: [External] - CrewAI',
-        'content': """Thank you Mike,
-
-I’ll stay in touch.
-
-The only blocker that I found (but a pretty important one) is that I could not connect CrewAI api to an Azure OpenAI llm – is there any known issue ?
-
-Regards,
-
-Alex.
-
-Alex J. Garcia
-
-Power BI COE Lead Manager, D&A , UniOps
-
-Power BI Best Practices Report""",
-        'ticket_id': '16750308878'
+    inputs1 = {
+        'subject': 'Getting deployment errors while deploying crewai',
+        'content': """Hello, I am getting deployment errors while trying to deploycrews "Deployment error: CodeBuild failed: PLA......." Can you please help? Thanks Satya""",
+        'ticket_id': '17218122917'
     }
 
-    inputs = {
+    inputs2 = {
         'subject': 'Cancel my subscription please',
         'content': """Hello, I've been in the community pages and the chat box for nearly two
 weeks now with multiple bugs and issues that are being resolved or
@@ -42,7 +28,7 @@ Alex Christian""",
         'ticket_id': '16680689177'
     }
 
-    TicketClassificationAndResponseAutomationCrew().crew().kickoff(inputs=inputs)
+    TicketClassificationAndResponseAutomationCrew().crew().kickoff(inputs=inputs1)
 
 
 def train():

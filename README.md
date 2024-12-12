@@ -1,54 +1,77 @@
 # TicketClassificationAndResponseAutomation Crew
 
-Welcome to the TicketClassificationAndResponseAutomation Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+This project automates the process of responding to customer support tickets using a combination of NLP and AI.
 
-## Installation
+The project is implemented in Python and uses the CrewAI framework. The CrewAI framework is an open-source framework for building AI automation projects. It is designed to be flexible and extensible, allowing for the integration of third-party tools and services.
 
-Ensure you have Python >=3.10 <=3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+The project consists of two main components: a ticket classification AI and a response automation AI. The ticket classification AI is responsible for classifying a ticket based on its subject and content. The response automation AI is responsible for generating a draft response to the ticket based on the classification and the content of the ticket.
 
-First, if you haven't already, install uv:
+The project is setup to use the CrewAI framework to integrate the two components. The CrewAI framework provides a simple and intuitive API for creating and managing AI agents. The API is designed to be easy to use and allows for the creation of complex automation projects.
 
-```bash
-pip install uv
-```
+The project is designed to be highly customizable and can be easily extended to integrate with other tools and services. The project is also designed to be highly scalable and can handle large volumes of tickets.
 
-Next, navigate to your project directory and install the dependencies:
+The project is built using the following technologies:
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
+* Python
+* CrewAI
+* NLP
+* AI
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+## Agents and Tasks
 
-- Modify `src/ticket_classification_and_response_automation/config/agents.yaml` to define your agents
-- Modify `src/ticket_classification_and_response_automation/config/tasks.yaml` to define your tasks
-- Modify `src/ticket_classification_and_response_automation/crew.py` to add your own logic, tools and specific args
-- Modify `src/ticket_classification_and_response_automation/main.py` to add custom inputs for your agents and tasks
+### Support Team Composition
 
-## Running the Project
+1. **Ticket Classification Specialist**
+   - **Role**: Analyzes and categorizes incoming support tickets
+   - **Task**: `classify_ticket_category`
+     - Classifies tickets into predefined categories:
+       - Access and Account Management
+       - Technical Support
+       - Information and Documentation
+       - Training and Onboarding
+       - Billing and Subscription
+       - Feature Requests and Feedback
+     - Uses ticket subject and content for accurate classification
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+2. **Priority Assignment Specialist**
+   - **Role**: Evaluates ticket urgency and sentiment
+   - **Task**: `assign_ticket_priority`
+     - Assigns priority levels (High/Medium/Low) based on:
+       - Customer urgency
+       - Sentiment analysis
+       - Ticket category
+     - Special rules:
+       - Information/Documentation tickets: Low priority
+       - Feature Requests/Feedback: Low priority (unless urgent)
+       - Billing/Subscription: Always High priority
 
-```bash
-$ crewai run
-```
+3. **Response Generation Specialist**
+   - **Role**: Creates draft responses using available knowledge bases
+   - **Task**: `generate_draft_response`
+     - Searches multiple sources for relevant information:
+       - crewai.com
+       - docs.crewai.com
+       - help.crewai.com
+     - Utilizes CSV and JSON RAG Search Tools
+     - Crafts contextual responses for the CrewAI Enterprise Platform
 
-This command initializes the ticket_classification_and_response_automation Crew, assembling the agents and assigning them tasks as defined in your configuration.
+4. **CrewAI Support Manager**
+   - **Role**: Orchestrates the support workflow
+   - **Task**: `prepare_response`
+     - Coordinates all previous tasks
+     - Prepares final response including:
+       - Ticket identification
+       - Classification
+       - Priority level
+       - Suggested response
+     - Ensures consistent response format and quality
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+### Workflow
 
-## Understanding Your Crew
+The support process follows a sequential workflow:
+1. Ticket classification
+2. Priority assignment
+3. Response generation
+4. Final response preparation
 
-The ticket_classification_and_response_automation Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the TicketClassificationAndResponseAutomation Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+Each agent's output serves as context for subsequent tasks, ensuring a cohesive and efficient support process.
