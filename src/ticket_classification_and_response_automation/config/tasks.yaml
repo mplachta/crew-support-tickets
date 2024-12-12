@@ -46,13 +46,13 @@ prepare_response:
   description: Prepare a response for a customer support ticket.
   expected_output: >
     The following markdown:
-    
-    # Ticket ID: *{ticket_id}*
-    URL: https://app.hubspot.com/contacts/45732688/ticket/{ticket_id}
-    Subject: *{subject}*
 
-    Classification: *[classification category]*
-    Priority: *[priority level]*
+    # Ticket ID: *{ticket_id}*
+
+    * URL: https://app.hubspot.com/contacts/45732688/ticket/{ticket_id}
+    * Subject: *{subject}*
+    * Classification: *[classification category]*
+    * Priority: *[priority level]*
 
     ## Suggested response:
 
