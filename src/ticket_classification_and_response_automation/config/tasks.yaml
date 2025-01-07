@@ -32,21 +32,27 @@ assign_ticket_priority:
   agent: priority_assigner
 
 generate_draft_response:
-  description: Use the available tools to search crewai.com, docs.crewai.com, and
-    help.crewai.com for relevant information to create a draft response to the ticket 
-    {subject} and {content} in the context of the CrewAI Enterprise Platform. Use the CSV
+  description: >
+    Use the available tools to search crewai.com, docs.crewai.com, and
+    help.crewai.com for relevant information to create a draft response to the ticket:
+    Subject: {subject}
+    Content: {content}
+    in the context of the CrewAI Enterprise Platform. Use the CSV
     RAG Search Tool to search a CSV file for relevant information to create a draft
     response. Use the JSON RAG Search Tool to search a JSON file for relevant information
     to create a draft response.
+
+    If the Subject is "Bot-Created Ticket" ignore the subject and only use the content.
+    If available, provide a link to the source of the information in the draft response.
+    Ensure you do not recommend contacting support.
   expected_output: >
     A draft response for the ticket.
   agent: response_generator
 
 prepare_response:
-  description: Prepare a response for a customer support ticket.
+  description: >
+    Prepare a response for a customer support ticket.
   expected_output: >
-    The following markdown:
-
     # Ticket ID: *{ticket_id}*
 
     * URL: https://app.hubspot.com/contacts/45732688/ticket/{ticket_id}

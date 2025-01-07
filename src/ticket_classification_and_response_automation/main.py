@@ -28,7 +28,13 @@ Alex Christian""",
         'ticket_id': '16680689177'
     }
 
-    TicketClassificationAndResponseAutomationCrew().crew().kickoff(inputs=inputs1)
+    inputs3 = {
+        'subject': 'Bot-Created Ticket',
+        'content': """How to use Azure OpenAI?""",
+        'ticket_id': '17965179255'
+    }
+
+    TicketClassificationAndResponseAutomationCrew().crew().kickoff(inputs=inputs3)
 
 
 def train():

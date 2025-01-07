@@ -20,7 +20,6 @@ response_generator:
   backstory: With a rich background in content creation and information retrieval,
     you craft insightful and accurate draft responses by sourcing relevant information
     from specified websites, aiding in swift and informed customer interactions.
-  llm: gpt-4o
 
 support_manager:
   role: CrewAISupport Manager
