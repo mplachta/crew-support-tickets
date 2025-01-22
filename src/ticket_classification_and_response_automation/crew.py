@@ -4,7 +4,7 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 from crewai.knowledge.source.csv_knowledge_source import CSVKnowledgeSource
 from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledgeSource
-from ticket_classification_and_response_automation.tools.hubspot_tickets_tool import HubspotTicketsTool
+# from ticket_classification_and_response_automation.tools.hubspot_tickets_tool import HubspotTicketsTool
 
 # Prepare the knowledge base for the Enterprise Platform Knowledge Base
 knowledge_enterprise_kb = CSVKnowledgeSource(
@@ -53,7 +53,7 @@ class TicketClassificationAndResponseAutomationCrew():
             llm=llm,
             knowledge_sources=[knowledge_enterprise_kb, oss_framework_kb],
             tools=[
-                HubspotTicketsTool(),
+                # HubspotTicketsTool(),
                 SerperDevTool(),
                 ScrapeWebsiteTool(),
             ]
